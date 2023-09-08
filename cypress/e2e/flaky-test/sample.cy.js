@@ -4,7 +4,11 @@ import { faker } from '@faker-js/faker'
 describe('Flaky tests bad practice', () => {
   beforeEach(() => {
 
-    cy.intercept('GET', '**/search**').as('getStories')
+    //
+    cy.intercept('GET',
+      '**/search**',
+      { fixture: 'stories.json'} //desacoplando do backend, injeta o objeto de retorno .json fixo que a API retornaria
+    ).as('getStories')
 
     cy.visit('https://wlsf82-hacker-stories.web.app')
 
