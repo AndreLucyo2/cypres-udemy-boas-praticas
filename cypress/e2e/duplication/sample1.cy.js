@@ -1,18 +1,20 @@
 describe('Code duplication bad practice - repetitive steps', () => {
-  it('searches by typing and hitting enter', () => {
-    cy.intercept(
-      'GET',
-      '**/search**'
-    ).as('getStories')
+  beforeEach(() => {
+    cy.intercept('GET', '**/search**').as('getStories')
 
     cy.visit('https://hackernews-seven.vercel.app')
     cy.wait('@getStories')
 
     cy.get('input[type="text"]')
       .should('be.visible')
-      .and('have.value', 'redux')
+      .as('searchField')
+      .and('have.value', 'redux')//valida que tem o valor padrão
       .clear()
-      .type('frontend testing{enter}')
+  });
+
+  it('searches by typing and hitting enter', () => {
+    cy.get('@searchField')
+      .type('frontend testing{enter}')//digita e ja manda um enter
 
     cy.wait('@getStories')
 
@@ -21,18 +23,7 @@ describe('Code duplication bad practice - repetitive steps', () => {
   })
 
   it('searches by typing and pressing the search button', () => {
-    cy.intercept(
-      'GET',
-      '**/search**'
-    ).as('getStories')
-
-    cy.visit('https://hackernews-seven.vercel.app')
-    cy.wait('@getStories')
-
-    cy.get('input[type="text"]')
-      .should('be.visible')
-      .and('have.value', 'redux')
-      .clear()
+    cy.get('@searchField')
       .type('frontend testing')
 
     cy.contains('button', 'Search')
