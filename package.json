@@ -1,0 +1,24 @@
+{
+  "name": "cypres-udemy-boas-praticas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndreLucyo2/cypres-udemy-boas-praticas.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndreLucyo2/cypres-udemy-boas-praticas/issues"
+  },
+  "homepage": "https://github.com/AndreLucyo2/cypres-udemy-boas-praticas#readme",
+  "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
+    "cypress": "^13.1.0"
+  }
+}
