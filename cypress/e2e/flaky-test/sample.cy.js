@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker'
 describe('Flaky tests bad practice', () => {
   beforeEach(() => {
 
-    //
+    //Moca a resposta estatica na pasta fixture
     cy.intercept('GET',
       '**/search**',
       { fixture: 'stories.json'} //desacoplando do backend, injeta o objeto de retorno .json fixo que a API retornaria
