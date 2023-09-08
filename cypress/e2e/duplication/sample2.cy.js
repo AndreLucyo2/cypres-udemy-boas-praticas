@@ -15,21 +15,16 @@ describe('Code duplication bad practice - repetitive tests', () => {
       .clear()
   });
 
-  it('searches for "reactjs"', () => {
-    cy.searchCmd('reactjs');
+  const termsToserachFor = ['reactjs', 'vuejs'];
+  termsToserachFor.forEach((term) => {
+    it(`searches for ${term}`, () => {
+      cy.searchCmd(term);
 
-    cy.wait('@getStories')
+      cy.wait('@getStories')
 
-    cy.get('.table-row')
-      .should('have.length', 100)
+      cy.get('.table-row')
+        .should('have.length', 100)
+    });
   });
 
-  it('searches for "vuejs"', () => {
-    cy.searchCmd('vuejs');
-
-    cy.wait('@getStories')
-
-    cy.get('.table-row')
-      .should('have.length', 100)
-  });
 })
