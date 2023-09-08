@@ -13,7 +13,7 @@ describe('Code duplication bad practice - repetitive actions and assertions', ()
     it('searches for the same term 3 times', () => {
 
       Cypress._.times(3,()=>{
-        cy.searchCmd('cypress.io')
+        cy.search('cypress.io')
         cy.get('.table-row')
           .its('length')
           .should('be.at.least', 1);

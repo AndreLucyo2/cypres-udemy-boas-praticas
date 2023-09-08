@@ -18,7 +18,7 @@ describe('Code duplication bad practice - repetitive tests', () => {
   const termsToserachFor = ['reactjs', 'vuejs'];
   termsToserachFor.forEach((term) => {
     it(`searches for ${term}`, () => {
-      cy.searchCmd(term);
+      cy.search(term);
 
       cy.wait('@getStories')
 
