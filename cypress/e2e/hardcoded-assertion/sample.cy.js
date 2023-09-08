@@ -11,17 +11,25 @@ describe('Hardcoded assertion bad practice', () => {
   })
 
   it('searches', () => {
-    cy.search('cypress.io')
-    cy.wait('@getStories')
+    //Se adapta a cada alteração nas fixtures
+    cy.fixture('stories').then(({ hits }) => {
+      cy.search('cypress.io');
+      cy.wait('@getStories');
+      cy.get('.table-row')
+        .as('tableRows')
+        .should('have.length', hits.length);
 
-    cy.get('.table-row')
-      .as('tableRows')
-      .should('have.length', 2)
-    cy.get('@tableRows')
-      .eq(0)
-      .should('contain', 'Agile Testing')
-    cy.get('@tableRows')
-      .eq(1)
-      .should('contain', 'Clean Code')
+      //valida coluna e valor: 
+      hits.forEach((hit, index) => {
+        cy.get('@tableRows')
+          .eq(index)
+          .should('contain', hit.title)
+          .should('contain', hit.author)
+          .should('contain', hit.num_comments)
+          .should('contain', hit.points)
+      });
+
+    });
+
   })
 })
