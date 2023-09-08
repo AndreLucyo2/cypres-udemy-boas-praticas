@@ -1,14 +1,14 @@
+/// <reference types ="Cypress" />
 describe('Browser testing bad practice - anchor with target _blank', () => {
   beforeEach(() => {
     cy.visit('https://cac-tat.s3.eu-central-1.amazonaws.com/index.html')
   })
 
   it('directs the user to the privacy page after removing the target and clicking the link', () => {
+    //veirica se possui o atributo com uma url especifica:
     cy.contains('a', 'Política de Privacidade')
-      .invoke('removeAttr', 'target')
-      .click()
+      .should('have.attr', 'href', 'privacy.html') //valida que vai para o lugar certo
+      .and('have.attr','target', '_blank');        //valida que vai para uma nova aba
 
-    cy.url()
-      .should('be.equal', 'https://cac-tat.s3.eu-central-1.amazonaws.com/privacy.html')
   })
 })
